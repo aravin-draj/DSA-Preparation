@@ -1,0 +1,41 @@
+# 🧮 13. Roman to Integer
+
+🔗 [LeetCode Link](https://leetcode.com/problems/two-sum/https://leetcode.com/problems/roman-to-integer/description/?envType=problem-list-v2&envId=eeudwo2i)
+
+## ✅ Approach:
+- Use a HashMap to give respective values
+- check whether a small roman appeared before a large one and subtract and add it accordingly.
+
+## ⏱️ Time Complexity:
+- unknown
+
+## 🔤 Code (Java):
+```java
+lass Solution {
+    public int romanToInt(String s) {
+        int roman_value=0;
+        int i=0;
+        int length=s.length();
+        Map<Character,Integer> roman_numerals=new HashMap<>(){{
+            put('I',1);
+            put('V',5);
+            put('X',10);
+            put('L',50);
+            put('C',100);
+            put('D',500);
+            put('M',1000);
+        }};
+        while(i<length){
+            int temp=roman_numerals.get(s.charAt(i));
+            if(i!=length-1 && temp<roman_numerals.get(s.charAt(i+1))){
+                roman_value+=roman_numerals.get(s.charAt(i+1))-temp;
+                i+=2;
+            }
+            else{
+                roman_value+=temp;
+                i++;
+            }
+        }
+        return roman_value;
+    }
+}
