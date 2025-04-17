@@ -1,0 +1,67 @@
+🧮 645. Set Mismatch
+🔗 https://leetcode.com/problems/set-mismatch/description/?envType=problem-list-v2&envId=eeudwo2i
+
+✅ Approach:
+i used hashmap to count the occurences and run a loop to get the key using the value 2(key of 2 occurence) to find duplicate.
+used the used the expected sum and acutal sum- duplicate got the missing value.
+
+⏱️ Time Complexity:
+O(nlogn) time, O(n) space
+
+🔤 Code (Java):
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        Map <Integer,Integer> map=new HashMap<>();
+        int value=1;
+        int[] res=new int[2];
+        int N=nums.length;
+        int sum=0;
+        Arrays.sort(nums);
+        for(int i=0;i<N;i++){
+            int temp=nums[i];
+            sum+=temp;
+            map.put(nums[i],map.getOrDefault(temp,0)+1);
+        }
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+            if(entry.getValue().equals(2)){
+                res[0]=entry.getKey();
+                break;
+            }
+        }
+        res[1]=((N*(N+1))/2)-(sum-res[0]);
+        return res;
+    }
+}
+
+Good Approach:
+o(n),o(n)
+code:
+
+
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        int n = nums.length;
+        Map<Integer, Integer> mp = new HashMap<>();
+
+        for (int i = 1; i <= n; i++) {
+            mp.put(i, 0);
+        }
+
+        for (int a : nums) {
+            mp.put(a, mp.get(a) - 1);
+        }
+
+        int duplicate = 0, missing = 0;
+
+        for (Map.Entry<Integer, Integer> entry : mp.entrySet()) {
+            if (entry.getValue() == -1) {
+                duplicate = entry.getKey();
+            }
+            if (entry.getValue() == 1) {
+                missing = entry.getKey();
+            }
+        }
+
+        return new int[]{duplicate, missing};
+    }
+}
