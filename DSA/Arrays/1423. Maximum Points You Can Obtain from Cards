@@ -1,0 +1,34 @@
+# 🧮 1423. Maximum Points You Can Obtain from Cards
+
+🔗 https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/description/
+
+## ✅ Approach:
+used the two pointer algo
+first calulated the left sum of k elements and
+then another loop to minimize the left sum by one element while simultaneosly adding one right element at a time
+in each iteration comparing the max_sum with the current_sum
+by this we are covering all the posible cases
+
+## ⏱️ Time Complexity:
+- O(2k) time, O(1) space
+
+## 🔤 Code (Java):
+```java
+public int[] twoSum(int[] nums, int target) {
+    class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        int left_sum=0;
+        for(int i=0;i<k;i++){
+            left_sum+=cardPoints[i];
+        }
+        int max_sum=left_sum;
+        int right_index=cardPoints.length-1;
+        for(int i=k-1;i>=0;i--){
+            left_sum-=cardPoints[i];
+            left_sum+=cardPoints[right_index];
+            right_index--;
+            max_sum=Math.max(max_sum,left_sum);
+        }
+        return max_sum;
+    }
+}
