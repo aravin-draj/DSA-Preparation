@@ -1,0 +1,82 @@
+# 🧮 1004. Max Consecutive Ones III
+
+🔗 https://leetcode.com/problems/max-consecutive-ones-iii/description/
+
+## ✅ Approach:
+No1:
+using sliding window to find the longest subarray with atmost k zeros
+r pointer moves while tracking the zeros, if the zeros execed using a loop to move the l pointer to eliminate a single zero 
+each time finding a valid subarray with valid amount of zeros updating the max variable
+
+No2:
+same approach but not using a loop to move the l pointer to eliminate a zero
+moving the l pointer 1 step anyway even it 0 or 1
+if i eliminated 0 then it means the zeros count comes to valid and the subarray is also valid
+so then only we are updating the max variable
+## ⏱️ Time Complexity:
+No1:
+- O(2N) time, O(1) space
+No2:
+- O(N) time, O(1) space /because of not using loop to eliminate the zero instead ignoring the not valid subarrays and whenever it valid max updated
+
+## 🔤 Code (Java):
+```java
+Approach No1:
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int l=0;
+        int r=0;
+        int N=nums.length;
+        int max_length=0;
+        int zeros=k;
+        while(r<nums.length){
+            if(nums[r]==0){
+                zeros--;
+            }
+            if(zeros>=0){
+                max_length=Math.max(max_length,r-l+1);
+            }
+            else{
+                while(zeros<0){
+                    if(nums[l]==0){
+                        zeros++;
+                    }
+                    l++;
+                }
+            }
+            r++;
+        }
+        return max_length;
+    }
+}
+
+Approach No2:
+
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int l=0;
+        int r=0;
+        int max_length=0;
+        int zeros=k;
+        while(r<nums.length){
+            if(nums[r]==0){
+                zeros--;
+            }
+            if(zeros>=0){
+                max_length=Math.max(max_length,r-l+1);
+            }
+            else{
+                if(nums[l]==0){
+                    zeros++;
+                    l++;
+                    max_length=Math.max(max_length,r-l+1);
+                }
+                else{
+                    l++;
+                }
+            }
+            r++;
+        }
+        return max_length;
+    }
+}
