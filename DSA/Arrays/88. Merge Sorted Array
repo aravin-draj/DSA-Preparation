@@ -1,0 +1,66 @@
+# 🧮 88. Merge Sorted Array
+
+🔗 https://leetcode.com/problems/merge-sorted-array/description/?envType=problem-list-v2&envId=eeudwo2i
+
+## ✅ Approach:
+used two pointer compare both array and shift elements manually
+Optimal approach - inserting elemnts at the end to avoid shifting
+
+## ⏱️ Time Complexity:
+- O((N+M)^2) time, O(1) space
+- O((N+M)) time, O(1) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i=0;
+        int j=0;
+        int size=m+n;
+        while(i<n){
+            if(nums2[i]<nums1[j] || (nums1[j]==0) && j>=m){
+                int temp=nums1[j];
+                nums1[j]=nums2[i];
+                for(int k=j+1;k<size;k++){
+                    nums1[k]+=temp;
+                    temp=nums1[k]-temp;
+                    nums1[k]-=temp;
+                }
+                i++;
+                m++;
+                System.out.println(Arrays.toString(nums1));
+            }
+            j++;
+        }
+        return;
+    }
+}
+
+optimal:
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1; // Start from the end of nums1
+        int j = n - 1; // Start from the end of nums2
+        int k = m + n - 1; // Position to place the largest element
+
+        // Traverse both arrays backwards and merge them into nums1
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[k] = nums1[i];
+                i--;
+            } else {
+                nums1[k] = nums2[j];
+                j--;
+            }
+            k--;
+        }
+
+        // If there are any remaining elements in nums2, copy them over
+        while (j >= 0) {
+            nums1[k] = nums2[j];
+            j--;
+            k--;
+        }
+    }
+}
