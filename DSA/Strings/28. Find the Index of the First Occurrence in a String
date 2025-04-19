@@ -1,0 +1,34 @@
+# 🧮 28. Find the Index of the First Occurrence in a String
+
+🔗 https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/?envType=problem-list-v2&envId=eeudwo2i
+
+## ✅ Approach:
+used nested loop and two pointers to iterate through haystack to find the occurence of needle
+used a flag variable to check the loop didt break and satisfied the conditon
+
+## ⏱️ Time Complexity:
+- O(N1 X N2) time, O(1) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int l=0;
+        int N1=haystack.length();
+        int N2=needle.length();
+        while(l<=(N1-N2)){
+            int flag=1;
+            for(int i=0;i<N2;i++){
+                if(haystack.charAt(l+i)!=needle.charAt(i)){
+                    flag=0;
+                    break;
+                }
+            }
+            if(flag==1){
+                return l;
+            }
+            l++;
+        }
+        return -1;
+    }
+}
