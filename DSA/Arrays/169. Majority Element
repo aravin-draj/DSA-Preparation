@@ -1,0 +1,39 @@
+# 🧮 169. Majority Element
+
+🔗 https://leetcode.com/problems/majority-element/description/?envType=problem-list-v2&envId=eeudwo2i
+
+## ✅ Approach:
+- Use a HashMap to track seen numbers.
+- simultanesouly checking the count going above N/2, to return the value rigthaway
+not optimal sapce complexity,optimal space complexity uses a wired algorithm
+
+## ⏱️ Time Complexity:
+- O(n) time, O(n) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public int majorityElement(int[] nums) {
+        Map<Integer,Integer> mp= new HashMap<>();
+        int N=nums.length;
+        for(int num:nums){
+            mp.put(num,mp.getOrDefault(num,0)+1);
+            if(mp.get(num)>N/2){
+                return num;
+            }
+        }
+        return 0;
+    }
+}class Solution {
+    public int majorityElement(int[] nums) {
+        Map<Integer,Integer> mp= new HashMap<>();
+        int N=nums.length;
+        for(int num:nums){
+            mp.put(num,mp.getOrDefault(num,0)+1);
+            if(mp.get(num)>N/2){
+                return num;
+            }
+        }
+        return 0;
+    }
+}
