@@ -3,12 +3,18 @@
 🔗 https://leetcode.com/problems/majority-element/description/?envType=problem-list-v2&envId=eeudwo2i
 
 ## ✅ Approach:
-- Use a HashMap to track seen numbers.
+1)- Use a HashMap to track seen numbers.
 - simultanesouly checking the count going above N/2, to return the value rigthaway
-not optimal sapce complexity,optimal space complexity uses a wired algorithm
+not optimal sapce complexity
+2)optimal solution uses more's majority voting algorithm
+takes a element and counter if the current element found count++ otherwise count-- if the counter ever becomes zero ele moves to the new 
+element along with the i loop with only runs o(n)
+the idea is a element which is majority will never cancel out
 
 ## ⏱️ Time Complexity:
 - O(n) time, O(n) space
+- O(n) time, O(1) space // optimal more's majority voting algorith,m
+
 
 ## 🔤 Code (Java):
 ```java
@@ -24,16 +30,23 @@ class Solution {
         }
         return 0;
     }
-}class Solution {
+}
+class Solution {
     public int majorityElement(int[] nums) {
-        Map<Integer,Integer> mp= new HashMap<>();
-        int N=nums.length;
-        for(int num:nums){
-            mp.put(num,mp.getOrDefault(num,0)+1);
-            if(mp.get(num)>N/2){
-                return num;
+        int count=0;
+        int ele=nums[0];
+        for(int i=0;i<nums.length;i++){
+            if(count==0){
+                count=1;
+                ele=nums[i];
+            }
+            else if(nums[i]==ele){
+                count++;
+            }
+            else{
+                count--;
             }
         }
-        return 0;
+        return ele;
     }
 }
