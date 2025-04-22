@@ -1,0 +1,86 @@
+# 🧮 242. Valid Anagram
+
+🔗 https://leetcode.com/problems/valid-anagram/submissions/1614296944/?source=submission-noac
+
+## ✅ Approach:
+1)Having two hashmaps to count the frequency to compare the values //My approach
+2)Taking advantage of the fact that string only contains lowercase letters using a array of 26 size to ++ for one string and -- for 
+another string at last if the array is all zero the strings are valid anagram
+3)if the strings contain any character,digit or special charaters
+we can use a single hashmap to ++ for one and -- for another, if all the values contains zero it is a valid anagram
+
+## ⏱️ Time Complexity:
+-  1)O(n) time, O(n) space
+   1)O(n) time, O(1) space
+   1)O(n) time, O(k) space //k is the no of unique characters in the strings
+
+
+## 🔤 Code (Java):
+1)
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        int N1=s.length();
+        int N2=t.length();
+        if(N1!=N2){
+            return false;
+        }
+        Map<Character,Integer> mp1=new HashMap<>();
+        Map<Character,Integer> mp2=new HashMap<>();
+
+        for(int i=0;i<N1;i++){
+            mp1.put(s.charAt(i),mp1.getOrDefault(s.charAt(i),0)+1);
+            mp2.put(t.charAt(i),mp2.getOrDefault(t.charAt(i),0)+1);
+        }
+        for(int i=0;i<N1;i++){
+            if(!mp1.get(s.charAt(i)).equals(mp2.getOrDefault(s.charAt(i),0))){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+2)
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        int N1=s.length();
+        int N2=t.length();
+        if(N1!=N2){
+            return false;
+        }
+        int[] count=new int[26];
+        for(int i=0;i<N1;i++){
+            count[s.charAt(i) - 'a']++;
+            count[t.charAt(i) - 'a']--;
+        }
+        for(int num: count){
+            if(num!=0){
+                return false;
+            }
+            
+        }
+        return true;
+    }
+}
+3)
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) return false;
+
+        Map<Character, Integer> countMap = new HashMap<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch1 = s.charAt(i);
+            char ch2 = t.charAt(i);
+
+            countMap.put(ch1, countMap.getOrDefault(ch1, 0) + 1);
+            countMap.put(ch2, countMap.getOrDefault(ch2, 0) - 1);
+        }
+
+        // Check if all counts are 0
+        for (int count : countMap.values()) {
+            if (count != 0) return false;
+        }
+
+        return true;
+    }
+}
