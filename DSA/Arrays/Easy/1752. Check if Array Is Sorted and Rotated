@@ -1,0 +1,23 @@
+# 1752. Check if Array Is Sorted and Rotated
+
+🔗 https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/
+
+## ✅ Approach:
+- check irrefularities,if its 1 then its can be sorted otherwise false
+
+## ⏱️ Time Complexity:
+- O(n) time, O(1) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public boolean check(int[] nums) {
+        int irregularities = 0;
+        int length = nums.length;
+        for (int i=0; i<length; i++) {
+            if (nums[i] > nums[(i + 1) % length])
+                irregularities += 1;
+        }
+        return irregularities > 1 ? false : true;
+    }
+}
