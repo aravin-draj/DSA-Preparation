@@ -1,0 +1,44 @@
+public class second_large_small {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter Elements : ");
+		String line=sc.nextLine();
+		String[] str=line.split(" ");
+		int N=str.length;
+		int[] arr=new int [N];
+		for(int i=0;i<N;i++) {
+			arr[i]=Integer.parseInt(str[i]);
+		}
+		
+		int large=Integer.MIN_VALUE;
+		int second_large=Integer.MIN_VALUE;
+		int small=Integer.MAX_VALUE;
+		int second_small=Integer.MAX_VALUE;
+		for(int i=0;i<N;i++) {
+			if(arr[i]>large) {
+				second_large=large;
+				large=arr[i];
+			}
+			else if(arr[i]>second_large && arr[i]!=large) {
+				second_large=arr[i];
+			}
+			
+			if(arr[i]<small) {
+				second_small=small;
+				small=arr[i];
+			}
+			else if(arr[i]<second_small && arr[i]!=small) {
+				second_small=arr[i];
+			}
+		}
+		System.out.println("Second small element : "+second_small);
+		System.out.println("Second large element : "+second_large);
+		
+		
+		
+		
+
+	}
+
+}
