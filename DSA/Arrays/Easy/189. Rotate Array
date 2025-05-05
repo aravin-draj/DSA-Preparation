@@ -1,0 +1,62 @@
+# 🧮 189. Rotate Array
+
+🔗 https://leetcode.com/problems/rotate-array/description/
+
+## ✅ Approach:
+1)use a temp array to store last k elements and then shift the remaining elements rigtht and place the temp elements in the first.
+2)revese the both parts seperately and reverse the whole array to get the expected array
+
+## ⏱️ Time Complexity:
+- O(n+k) time, O(k) space
+-O(n+2k) time,O(1) space
+
+## 🔤 Code (Java):
+```java
+1)
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int N=nums.length;
+        if(N==1){
+            return;
+        }
+        k%=N;
+        int[] temp=new int[k];
+        for(int i=0;i<k;i++){
+            temp[i]=nums[N-k+i];
+        }
+        for(int i=N-1;i>=k;i--){
+            nums[i]=nums[i-k];
+        }
+        for(int i=0;i<k;i++){
+            nums[i]=temp[i];
+        }
+        return;
+    }
+}
+
+2)
+class Solution {
+    public void reverse(int[] nums,int start,int end){
+        while(start<end){
+            int temp=nums[start];
+            nums[start]=nums[end];
+            nums[end]=temp;;
+            start++;
+            end--;
+        }
+        return;
+    }
+    public void rotate(int[] nums, int k) {
+        int N=nums.length;
+        if(N==1){
+            return;
+        }
+        k%=N;
+        reverse(nums,N-k,N-1);
+        reverse(nums,0,N-k-1);
+        reverse(nums,0,N-1);
+
+        return;
+        
+    }
+}
