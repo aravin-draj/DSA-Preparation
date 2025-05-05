@@ -1,0 +1,32 @@
+# 🧮 26. Remove Duplicates from Sorted Array
+
+🔗 https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
+
+## ✅ Approach:
+- Two pointers,i to fill the array and j to find unique element to fill
+
+## ⏱️ Time Complexity:
+- O(n) time, O(1) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int N=nums.length;
+        int i=1;
+        int j=1;
+        int current=nums[0];
+        while(i<N && j<N){
+            while(j<N && nums[j]==current){
+                j++;
+            }
+            if(j==N){
+                break;
+            }
+            nums[i]=nums[j];
+            current=nums[i];
+            i++;
+        }
+        return i;
+    }
+}
