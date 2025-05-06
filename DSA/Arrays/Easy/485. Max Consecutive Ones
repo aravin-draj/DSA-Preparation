@@ -1,0 +1,29 @@
+# 🧮 485. Max Consecutive Ones
+
+🔗 https://leetcode.com/problems/max-consecutive-ones/description/
+
+## ✅ Approach:
+- maintain a counter increase it if 1 and reset it if 0
+and update max_ones in every iteration
+
+## ⏱️ Time Complexity:
+- O(n) time, O(1) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int max_ones=0;
+        int count=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==1){
+                count++;
+            }
+            else{
+                count=0;
+            }
+            max_ones=Math.max(max_ones,count);
+        }
+        return max_ones;
+    }
+}
