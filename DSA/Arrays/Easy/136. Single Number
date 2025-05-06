@@ -1,0 +1,26 @@
+# 🧮 136. Single Number
+
+🔗 https://leetcode.com/problems/single-number/description/
+
+## ✅ Approach:
+- using xor to eliminate numbers appears twice 
+
+## ⏱️ Time Complexity:
+- O(n) time, O(1) space
+
+## 🔤 Code (Java):
+class Solution {
+    public int singleNumber(int[] nums) {
+        int res=nums[0];
+        for(int i=1;i<nums.length;i++){
+            res^=nums[i];
+        }
+        return res;
+    }
+}
+            }
+            max_ones=Math.max(max_ones,count);
+        }
+        return max_ones;
+    }
+}
