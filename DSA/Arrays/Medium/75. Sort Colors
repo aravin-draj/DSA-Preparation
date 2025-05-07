@@ -1,0 +1,40 @@
+# 🧮 75. Sort Colors
+
+🔗 https://leetcode.com/problems/sort-colors/description/
+
+## ✅ Approach:
+uses 3 variables or pointers
+2 to track and add first and last element(0,2)
+mid pointer to traverse
+if 0 and 2 placed 1s will be automatically placed in the right place
+## ⏱️ Time Complexity:
+- O(n) time, O(1) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public void sortColors(int[] nums) {
+        int low=0;
+        int mid=0;
+        int high=nums.length-1;
+        while(mid<=high){
+            if(nums[mid]==0){
+                int temp=nums[low];
+                nums[low]=nums[mid];
+                nums[mid]=temp;
+                low++;
+                mid++;
+            }
+            else if(nums[mid]==1){
+                mid++;
+            }
+            else{
+                int temp=nums[high];
+                nums[high]=nums[mid];
+                nums[mid]=temp;
+                high--;
+            }
+        }
+        return;
+    }
+}
