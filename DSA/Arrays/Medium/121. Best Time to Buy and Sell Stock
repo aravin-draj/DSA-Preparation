@@ -43,7 +43,7 @@ class Solution {
 }
 
 2)Dynamic Programming
-
+#forward version
 class Solution {
     public int maxProfit(int[] prices) {
         int buy_min=prices[0];
@@ -55,6 +55,18 @@ class Solution {
         return max_profit;
     }
 }
+#backward version
+public int maxProfit(int[] prices) {
+        int N=prices.length;
+        int sell=prices[N-1];
+        int profit=0;
+        for(int i=N-2;i>=0;i--){
+            sell=Math.max(prices[i],sell);
+            profit=Math.max(profit,sell-prices[i]);
+        }
+        return profit;
+    }
+
 
 3)Two pointers optimal
 
