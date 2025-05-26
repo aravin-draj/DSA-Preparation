@@ -1,0 +1,17 @@
+# 🧮 796. Rotate String
+
+🔗 https://leetcode.com/problems/rotate-string/description/
+
+## ✅ Approach:
+- if we have a string 2 times it will contain all the possible shifting posibilities
+
+## ⏱️ Time Complexity:
+- O(n) time, O(1) space
+
+## 🔤 Code (Java):
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        s+=s;
+        return (s.length()==goal.length()*2 && s.contains(goal));
+    }
+}
