@@ -1,0 +1,47 @@
+# 🧮 451. Sort Characters By Frequency
+
+🔗https://leetcode.com/problems/sort-characters-by-frequency/description/
+
+## ✅ Approach:
+-first we compute the frequency,multiple letters can have same frequency,so this only is not enough
+-using the freqency we are creating a hash map with characters for each of the frequency
+-by iterating the size of the word,if frequecy key present,we are updating the result string
+
+## ⏱️ Time Complexity:
+- Time - O(N+N+N^2)= O(N^2)  its because of string is inefficient,if we use string builder O(N)
+- Space - O(N)
+
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public String frequencySort(String s) {
+        int N=s.length();
+        if(N<=2){
+            return s;
+        }
+        Map<Integer,List<Character>> count=new HashMap<>();
+        Map<Character,Integer> frequency=new HashMap<>();
+        String res="";
+
+        for(int i=0;i<N;i++){
+            frequency.put(s.charAt(i),frequency.getOrDefault(s.charAt(i),0)+1);
+        }
+       
+        for(Map.Entry<Character,Integer> i : frequency.entrySet()){
+            char ch=i.getKey();
+            int freq=i.getValue();
+            count.putIfAbsent(freq, new ArrayList<>());
+            count.get(freq).add(ch);
+        }
+        
+        for(int i=N;i>=1;i--){
+            if(count.containsKey(i)){
+                for(char ch : count.get(i)){
+                    res+=String.valueOf(ch).repeat(i);
+                }
+            }
+        }
+        return res;
+    }
+}
