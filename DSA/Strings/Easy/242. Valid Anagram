@@ -1,0 +1,62 @@
+# 🧮 242. Valid Anagram
+
+🔗 https://leetcode.com/problems/valid-anagram/description/
+
+## ✅ Approach:
+- only lowercase letters so we can use a array of 26 letters and doing ++ for the string 1 and -- for the string 2 
+we will get a array of zeros if it is anagram,if not its not anagram
+
+-the same logic using two hashmaps.
+
+## ⏱️ Time Complexity:
+- unknown
+
+## 🔤 Code (Java):
+```java
+1)
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        int N1=s.length();
+        int N2=t.length();
+        if(N1!=N2){
+            return false;
+        }
+        int[] count=new int[26];
+        for(int i=0;i<N1;i++){
+            count[s.charAt(i) - 'a']++;
+            count[t.charAt(i) - 'a']--;
+        }
+        for(int num: count){
+            if(num!=0){
+                return false;
+            }
+            
+        }
+        return true;
+    }
+}
+
+2)
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length()){
+            return false;
+        }
+        Map<Character,Integer> mp=new HashMap<>();
+
+        for(int i=0;i<s.length();i++){
+            char c1=s.charAt(i);
+            char c2=t.charAt(i);
+            mp.put(c1,mp.getOrDefault(c1,0)+1);
+            mp.put(c2,mp.getOrDefault(c2,0)-1);
+        }
+
+        for(int i=0;i<s.length();i++){
+            if(mp.get(s.charAt(i))!=0){
+                return false;
+            }
+        }
+        return true;
+
+    }
+}
