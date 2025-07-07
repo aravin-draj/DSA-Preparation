@@ -16,10 +16,10 @@ public class Quick_sort {
 	static int place_pivot(int[] arr,int low,int high) {
 		int pivot=low;
 		while(low<high) {
-			while( low<=high&& arr[low]>=arr[pivot]) {
+			while( low<=high&& arr[low]<=arr[pivot]) {
 				low++;
 			}
-			while( high>=low&& arr[high]<arr[pivot]) {
+			while( high>=low&& arr[high]>arr[pivot]) {
 				high--;
 			}
 			
