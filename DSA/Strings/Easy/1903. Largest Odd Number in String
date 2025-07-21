@@ -1,0 +1,22 @@
+# 🧮 1903. Largest Odd Number in String
+
+🔗 https://leetcode.com/problems/largest-odd-number-in-string/description/
+
+## ✅ Approach:
+- iterating from the back to fing a odd number and returning the substring from start to that number
+
+## ⏱️ Time Complexity:
+- O(n) time, O(1) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public String largestOddNumber(String num) {
+        for(int i=num.length()-1;i>=0;i--){
+            if((int)num.charAt(i)%2==1){
+                return num.substring(0,i+1);
+            }
+        }
+        return "";
+    }
+}
