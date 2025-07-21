@@ -1,0 +1,30 @@
+# 🧮 14. Longest Common Prefix
+
+🔗 https://leetcode.com/problems/longest-common-prefix/description/
+
+## ✅ Approach:
+- we have check the common prefix on every element of the array,so we sort the array and check the first and last element
+this is not the optimal solution,for better optimization we can use
+divide and conquer,binary search and tire
+
+## ⏱️ Time Complexity:
+- O(n*m*log n) time, O(1) space
+
+## 🔤 Code (Java):
+```java
+import java.lang.Math;
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        StringBuilder ans=new StringBuilder();
+        Arrays.sort(strs);
+        String first=strs[0];
+        String last=strs[strs.length-1];
+        for(int i=0;i<(Math.min(first.length(),last.length()));i++){
+            if(first.charAt(i)!=last.charAt(i)){
+                break;
+            }
+            ans.append(first.charAt(i));
+        }
+            return ans.toString();
+    }
+}
