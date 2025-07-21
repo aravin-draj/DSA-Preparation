@@ -1,0 +1,37 @@
+# 🧮 205. Isomorphic Strings
+
+
+🔗 https://leetcode.com/problems/isomorphic-strings/description/
+
+## ✅ Approach:
+-hashmap to map the right character and set is to reverse check a character is already mapped or not
+
+## ⏱️Complexity:
+- Time - O(N)
+- Space - O(N)
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        Map<Character,Character> mp=new HashMap<>();
+        Set<Character> mapped=new HashSet<>();
+        for(int i=0;i<s.length();i++){
+            char c1=s.charAt(i);
+            char c2=t.charAt(i);
+            if(mp.containsKey(c1)){
+                if(mp.get(c1)!=c2){
+                    return false;
+                }
+            }
+            else{
+                if(mapped.contains(c2)){
+                    return false;
+                }
+                mp.put(c1,c2);
+                mapped.add(c2);
+            }
+        }
+        return true;
+    }
+}
