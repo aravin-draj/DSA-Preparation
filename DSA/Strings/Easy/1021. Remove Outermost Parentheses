@@ -1,0 +1,60 @@
+
+# 🧮 1021. Remove Outermost Parentheses
+
+🔗 https://leetcode.com/problems/remove-outermost-parentheses/description/
+
+## ✅ Approach:
+- 1)if the stack not empty before push and after pop,we add to the result because the the current paranthesis is not outer
+
+-2)we use a counter to track no of opened when ( more than zero open and if ) more that open,we add to the result 
+## ⏱️ Time Complexity:
+- O(n) time, O(n) space
+
+## 🔤 Code (Java):
+```java
+1)
+class Solution {
+    public String removeOuterParentheses(String s) {
+        StringBuilder res=new StringBuilder();
+        Stack<Character> st=new Stack<>();
+        for(char c:s.toCharArray()){
+            if(c=='('){
+                if(!st.isEmpty()){
+                    res.append(c);
+                }
+                st.push(c);
+            }
+            else{
+                st.pop();
+                if(!st.isEmpty()){
+                    res.append(c);
+                }
+            }
+        }
+        return res.toString();
+    }
+}
+
+2)
+class Solution {
+    public String removeOuterParentheses(String s) {
+        StringBuilder res = new StringBuilder();
+        int count = 0; // Tracks the depth of parentheses
+
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                if (count > 0) {
+                    res.append(c);
+                }
+                count++;
+            } else {
+                count--;
+                if (count > 0) {
+                    res.append(c);
+                }
+            }
+        }
+
+        return res.toString();
+    }
+}
