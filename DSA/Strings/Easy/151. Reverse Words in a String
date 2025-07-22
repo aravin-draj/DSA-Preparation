@@ -1,0 +1,39 @@
+
+# 🧮 151. Reverse Words in a String
+
+🔗 https://leetcode.com/problems/reverse-words-in-a-string/
+
+## ✅ Approach:
+- using a two pointer last will stay at the end of the word and first will move to the start of the word
+
+## ⏱️ Time Complexity:
+- O(n) time, O(n) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public String reverseWords(String s) {
+        StringBuilder str=new StringBuilder();
+        s=s.trim();
+        int first=s.length()-1;
+        int last=s.length()-1;
+
+        while(first>=0){
+            if(s.charAt(last)==' '){
+                last--;
+                first--;
+            }
+            else{
+                if(first==0 ||s.charAt(first-1)==' '){
+                str.append(s.substring(first,last+1));
+                last=first-1;
+                if(first!=0){
+                    str.append(' ');
+                }
+            }
+            first--;
+            }
+        }
+        return str.toString();
+    }
+}
