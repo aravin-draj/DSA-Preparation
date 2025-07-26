@@ -1,0 +1,30 @@
+# 🧮 1614. Maximum Nesting Depth of the Parentheses
+
+
+🔗 https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/description/
+
+## ✅ Approach:
+-increasing and decreasing the open variable accordingly while maintaining the max of open
+
+## ⏱️Complexity:
+- Time - O(N)
+- Space - O(1)
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public int maxDepth(String s) {
+        int max=0;
+        int open=0;
+        for(char c : s.toCharArray()){
+            if(c=='('){
+                open++;
+                max=Math.max(max,open);
+            }
+            else if(c==')'){
+                open--;
+            }
+        }
+        return max;
+    }
+}
