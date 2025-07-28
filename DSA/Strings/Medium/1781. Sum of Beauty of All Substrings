@@ -1,0 +1,41 @@
+# 🧮 1781. Sum of Beauty of All Substrings
+
+🔗https://leetcode.com/problems/sum-of-beauty-of-all-substrings/description/
+
+## ✅ Approach:
+-Maintaining prefix sum in every iteration of i loop,
+every iteration of j loop is a substring and for every substring k loop calculates the beauty sum
+
+## ⏱️ Time Complexity:
+- Time - O(N^2)*26 --> O(N^2)
+- Space - O(1)
+
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public int beautySum(String s) {
+        int N=s.length();
+        int sum=0;
+        for(int i=0;i<N;i++){
+            int[] arr=new int[26];
+            for(int j=i;j<N;j++){
+
+                char c=s.charAt(j);
+                arr[c-'a']+=1;
+                int min=N;
+                int max=0;
+                for(int freq:arr){
+                    if(freq>0){
+                        min=Math.min(min,freq);
+                        max=Math.max(max,freq);
+                    }
+                }
+               sum+=(max-min);
+
+            }
+            
+        }
+        return sum;
+    }
+}
