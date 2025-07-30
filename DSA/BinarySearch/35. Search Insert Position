@@ -1,0 +1,32 @@
+# 🧮 35. Search Insert Position
+
+🔗 https://leetcode.com/problems/search-insert-position/description/
+
+## ✅ Approach:
+-we are just find a lower bound of a element in the sorted array which is the first position where arr[i]>=target
+if not target found it means the target is larger than every element in the array return the size of the array in that case
+
+## ⏱️ Time Complexity:
+- O(log N) time, O(1) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int start=0;
+        int end=nums.length-1;
+        int mid;
+        int index=nums.length;
+        while(start<=end){
+           mid=(start+end)/2;
+           if(nums[mid]>=target){
+                index=mid;
+                end=mid-1;
+           }
+           else{
+            start=mid+1;
+           }
+        }
+        return index;
+    }
+}
