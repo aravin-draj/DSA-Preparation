@@ -1,0 +1,52 @@
+# 🧮 34. Find First and Last Position of Element in Sorted Array
+
+🔗https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/
+
+## ✅ Approach:
+-If we found the lower bound which is first occurence of the targer if present,then we can iterate from that point to find the
+last occurence,if we dont find any occurence then return -1 for both
+
+- efficient solution is to find lower bound and check the target present in the array and finding the upper bound 
+and upper bound index -1 is the answer
+
+## ⏱️ Time Complexity:
+- O(N) time in worst case , O(1) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int[] res={-1,-1};
+        int start=0;
+        int end=nums.length-1;
+        int mid;
+        int lower_bound=-1;
+
+        while(start<=end){
+            mid=(start+end)/2;
+            if(nums[mid]>=target){
+                lower_bound=mid;
+                end=mid-1;
+            }
+            else{
+                start=mid+1;
+            }
+        }
+
+        if(lower_bound!=-1 && nums[lower_bound]==target){
+            res[0]=lower_bound;
+            res[1]=lower_bound;
+            for(int i=lower_bound+1;i<nums.length;i++){
+                if(nums[i]==target){
+                    res[1]=i;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        
+        return res;
+    }
+}
+}
