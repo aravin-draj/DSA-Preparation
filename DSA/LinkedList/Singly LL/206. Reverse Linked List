@@ -1,0 +1,56 @@
+# 🧮 206. Reverse Linked List
+
+🔗https://leetcode.com/problems/reverse-linked-list/description/
+
+## ✅ Approach:
+1) 
+
+## ⏱️ Time Complexity:
+- O(N) time in worst case , O(1) space
+
+## 🔤 Code (Java):
+```java
+1) Iterative Solution 
+storing the next node and making a connection to the temp and prev variable and moving the temp and prev forward
+
+2) Recusive Solution
+the last element is preserved as newhead and retured in every iteration
+in each step the current head is added and the same newhead is returend every time
+
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode temp=head;
+        ListNode prev=null;
+        ListNode front;
+
+        while(temp!=null){
+            front=temp.next;
+            temp.next=prev;
+            prev=temp;
+            temp=front;
+        }
+        head=prev;
+        return head;
+    }
+}
+}
+
+2) Recursive Solution
+
+class Solution {
+    public ListNode recursion(ListNode head){
+        if(head==null || head.next==null){
+            return head;
+        }
+        ListNode NewHead=recursion(head.next);
+        ListNode front=head.next;
+        front.next=head;
+        head.next=null;
+        
+        return NewHead;
+    }
+    public ListNode reverseList(ListNode head) {
+        return recursion(head);
+    }
+}
