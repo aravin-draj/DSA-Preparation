@@ -1,0 +1,53 @@
+# 🧮 81. Search in Rotated Sorted Array II
+
+🔗https://leetcode.com/problems/search-in-rotated-sorted-array-ii/submissions/1739475742/
+
+## ✅ Approach:
+- its same as the search in rotated array I,it contains duplicate
+  so when we encounter low==mid==high, we cannot determine which half is sorted,so we shrink it
+
+## ⏱️ Time Complexity:
+- O(log N) time , O(1) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public boolean search(int[] nums, int target) {
+        int low=0;
+        int high=nums.length-1;
+
+        while(low<=high){
+            int mid=(low+high)/2;
+
+            if(nums[mid]==target){
+                return true;
+            }
+
+            if(nums[low]==nums[mid] && nums[mid]==nums[high]){  //shrinking
+                low++;
+                high--;
+                continue;
+            }
+            
+            if(nums[low]<=nums[mid]){     //left half is sorted
+                if(nums[low]<=target && nums[mid]>target){
+                    high=mid-1;          // target lies in left half
+                }
+                else{
+                    low=mid+1;           // target lies in right half
+                }
+            }
+
+            else{                        //right half is sorted
+                if(nums[mid]<target && nums[high]>=target){
+                    low=mid+1;           // target lies in right half
+                }
+                else{
+                    high=mid-1;          // target lies in left half
+                }
+            }
+        }
+        return false;
+    }
+}
+}
