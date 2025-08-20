@@ -1,0 +1,29 @@
+# 🧮 141. Linked List Cycle
+
+🔗https://leetcode.com/problems/linked-list-cycle/submissions/1740743518/
+
+## ✅ Approach:
+- if the cylce does exist the fast pointer will meet the slow pointer because of a loop
+otherwise the end will be reached
+
+## ⏱️ Time Complexity:
+- O(N) time in worst case , O(1) space
+
+## 🔤 Code (Java):
+```java
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow=head;
+        ListNode fast=head;
+
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    }
+}
