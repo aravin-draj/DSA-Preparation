@@ -1,0 +1,37 @@
+# 🧮 142. Linked List Cycle II
+
+🔗https://leetcode.com/problems/linked-list-cycle-ii/description/
+
+## ✅ Approach:
+-if cycle exist slow and fast will meet
+to find the starting point of the cycle,the distance from the head and meeting point to the loop start will be the same
+so we iterate that after finding the cycle
+
+## ⏱️ Time Complexity:
+- O(N) time in worst case , O(1) space
+
+## 🔤 Code (Java):
+```java
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode slow=head;
+        ListNode fast=head;
+
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            
+            if(slow==fast){
+                slow=head;
+                while(slow!=fast){
+                    slow=slow.next;
+                    fast=fast.next;
+                }
+                return slow;
+            }
+        }
+        return null;
+        
+    }
+}
+}
