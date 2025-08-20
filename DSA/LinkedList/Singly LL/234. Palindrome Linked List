@@ -1,0 +1,60 @@
+# 🧮 234. Palindrome Linked List
+
+🔗https://leetcode.com/problems/palindrome-linked-list/description/
+
+## ✅ Approach:
+-reversing the second half and compring with the first half
+and reversing back the second half to original array
+
+## ⏱️ Time Complexity:
+- O(N) time in worst case , O(1) space
+
+## 🔤 Code (Java):
+```java
+class Solution {
+    public ListNode reverse(ListNode head){
+        ListNode temp=head;
+        ListNode prev=null;
+        ListNode front;
+
+        while(temp!=null){
+            front=temp.next;
+            temp.next=prev;
+            prev=temp;
+            temp=front;
+        }
+        head=prev;
+        return head;
+    }
+    public boolean isPalindrome(ListNode head) {
+        if(head==null || head.next==null){
+            return true;
+        }
+
+        ListNode slow=head;
+        ListNode fast=head;
+
+        while(fast.next!=null && fast.next.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+
+        ListNode NewHead=reverse(slow.next);
+
+        ListNode head1=head;
+        ListNode head2=NewHead;
+
+       while(head2!=null){
+            if(head1.val!=head2.val){
+                return false;
+            }
+            head1=head1.next;
+            head2=head2.next;
+        }
+        
+
+        reverse(NewHead);
+        return true;
+        
+    }
+}
