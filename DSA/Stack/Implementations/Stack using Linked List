@@ -1,0 +1,62 @@
+package stack;
+
+class StackUsingLL {
+	private Node top;
+	
+	public StackUsingLL() {
+		this.top=null;
+	}
+	
+	public void push(int value) {
+		Node newNode=new Node(value);
+		if(top==null) {
+			top=newNode;
+		}
+		else {
+			newNode.next=top;
+			top=newNode;
+		}
+		System.out.println("Pushed "+value+" to the Stack");
+	}
+	
+	public boolean isEmpty() {
+		return(top==null);
+	}
+	
+	public int pop() {
+		if(isEmpty()) {
+			System.out.println("Stack is Empty,Cannot pop");
+			return -1;
+		}
+		else {
+			int value=top.data;
+			top=top.next;
+			System.out.println("Popped "+value+" from the Stack");
+			return value;
+		}
+	}
+	
+	public int peek() {
+		if(isEmpty()) {
+			System.out.println("Stack is Empty,Cannot peek");
+			return -1;
+		}
+		else {
+			return top.data;
+		}
+	}
+	
+	public void display() {
+		if(isEmpty()) {
+			System.out.println("Stack is Empty");
+		}
+		else {
+			Node current=top;
+			while(current!=null) {
+				System.out.print(current.data);
+				current=current.next;
+			}
+		}
+		System.out.println();
+	}
+}
