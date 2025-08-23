@@ -36,7 +36,7 @@ class StackUsingArray {
 		}
 		else {
 			int value=stackArray[top--];
-			System.out.println("Pooped "+value+" from the Stack");
+			System.out.println("Popped "+value+" from the Stack");
 			return value;
 		}
 	}
